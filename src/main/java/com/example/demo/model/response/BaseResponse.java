@@ -1,6 +1,5 @@
 package com.example.demo.model.response;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +7,7 @@ import lombok.Setter;
 @Setter
 public class BaseResponse {
 
-    @ApiModelProperty(notes = "error code")
     protected String code;
-    @ApiModelProperty(notes = "error message")
     protected String message;
 
     public BaseResponse(String message, String code) {
