@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Map;
 
 @Repository
-public interface RedisRepository {
+public interface RedisService {
     User save(User user);
 
     User update(User user);

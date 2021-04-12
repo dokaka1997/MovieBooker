@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.User;
-import com.example.demo.service.RedisRepository;
+import com.example.demo.service.RedisService;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,13 +11,13 @@ import java.util.Map;
 
 @Service
 @Repository
-public class RedisRepositoryImpl implements RedisRepository {
+public class RedisServiceImpl implements RedisService {
 
     private RedisTemplate<String, User> redisTemplate;
 
     private HashOperations hashOperations;
 
-    public RedisRepositoryImpl(RedisTemplate<String, User> redisTemplate) {
+    public RedisServiceImpl(RedisTemplate<String, User> redisTemplate) {
         this.redisTemplate = redisTemplate;
         hashOperations = redisTemplate.opsForHash();
     }
