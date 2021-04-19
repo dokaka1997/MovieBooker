@@ -1,5 +1,6 @@
 package com.example.demo.model.entity;
 
+import com.example.demo.enumeration.FilmType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +17,6 @@ public class RoleEntity {
 
     @Column(name = "name")
     private String name;
+
 
 }
