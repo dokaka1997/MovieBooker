@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Getter
@@ -17,9 +16,8 @@ public class RoomEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
-    private List<FilmEntity> filmId;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "max_seats")
     private int maxSeats;

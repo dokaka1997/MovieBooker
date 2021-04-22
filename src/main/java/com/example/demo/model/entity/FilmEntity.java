@@ -15,6 +15,9 @@ public class FilmEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Enumerated(value = EnumType.STRING)
     private FilmType filmType;
 
@@ -32,10 +35,6 @@ public class FilmEntity {
 
     @Column(name = "time")
     private String time;
-
-    @ManyToOne
-    @JoinColumn(name = "rome")
-    private RoomEntity room;
 
 
 }

@@ -3,8 +3,8 @@
 - Tạo tài khoản
 - Xem danh sách phim
 - Xem chi tiết phim
-- Mua vé, chọn chỗ ngồi
 - Cập nhật thông tin cá nhân
+- Mua vé, chọn chỗ ngồi
 
 2. Phần nhân viên
 - Tìm kiếm vé theo mã vé

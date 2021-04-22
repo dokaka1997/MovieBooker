@@ -1,6 +1,5 @@
 package com.example.demo.model.entity;
 
-import com.example.demo.enumeration.FilmType;
 import lombok.Getter;
 import lombok.Setter;
 
