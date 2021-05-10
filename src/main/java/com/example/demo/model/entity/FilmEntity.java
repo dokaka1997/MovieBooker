@@ -24,6 +24,9 @@ public class FilmEntity {
     @Column(name = "age_limit")
     private int ageLimit;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "actor")
     private String actor;
 

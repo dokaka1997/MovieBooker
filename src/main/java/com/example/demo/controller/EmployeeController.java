@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.entity.FilmEntity;
 import com.example.demo.model.response.TicketResponse;
 import com.example.demo.service.EmployeeService;
 import lombok.AllArgsConstructor;
