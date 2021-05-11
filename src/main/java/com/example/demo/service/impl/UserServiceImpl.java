@@ -46,17 +46,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ListFilmResponse> getListFilm() {
-        List<ListFilmResponse> listFilmResponses = new ArrayList<>();
-        List<FilmEntity> filmEntities = filmRepository.findAll();
-
-        for (FilmEntity filmEntity : filmEntities) {
-            ListFilmResponse listFilmResponse = new ListFilmResponse();
-            listFilmResponse.setId(filmEntity.getId());
-            listFilmResponse.setName(filmEntity.getName());
-            listFilmResponses.add(listFilmResponse);
-        }
-        return listFilmResponses;
+    public List<FilmEntity> getListFilm() {
+        return filmRepository.findAll();
     }
 
     @Override

@@ -14,7 +14,7 @@ public interface UserService {
 
     UserResponse createUser(UserRequest userRequest);
 
-    List<ListFilmResponse> getListFilm();
+    List<FilmEntity> getListFilm();
 
     FilmEntity geFilmById(Long id);
 

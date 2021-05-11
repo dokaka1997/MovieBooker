@@ -39,5 +39,7 @@ public class FilmEntity {
     @Column(name = "time")
     private String time;
 
+    @Column(name = "link")
+    private String link;
 
 }

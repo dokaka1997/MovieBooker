@@ -6,11 +6,13 @@ import com.example.demo.model.request.LoginRequest;
 import com.example.demo.model.response.LoginResponse;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.LoginService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class LoginServiceImpl implements LoginService {
     UserRepository userRepository;
 
@@ -24,6 +26,7 @@ public class LoginServiceImpl implements LoginService {
         } else {
             String token = "test123";
             loginResponse.setToken(token);
+            loginResponse.setRoleEntity(userEntity.get().getRoleEntity());
             return loginResponse;
         }
     }

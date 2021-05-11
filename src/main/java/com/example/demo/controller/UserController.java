@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/get-all-film")
-    public ResponseEntity<List<ListFilmResponse>> getAllFilm() {
+    public ResponseEntity<List<FilmEntity>> getAllFilm() {
         return ResponseEntity.ok(userService.getListFilm());
     }
 
