@@ -26,7 +26,8 @@ public class LoginServiceImpl implements LoginService {
         } else {
             String token = "test123";
             loginResponse.setToken(token);
-            loginResponse.setRoleEntity(userEntity.get().getRoleEntity());
+            loginResponse.setRole(userEntity.get().getRoleEntity().getId());
+            loginResponse.setName(loginRequest.getUsername());
             return loginResponse;
         }
     }

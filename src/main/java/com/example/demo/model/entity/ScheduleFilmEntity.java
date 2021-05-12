@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "schedule")
-public class ScheduleFilm {
+public class ScheduleFilmEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,6 +22,14 @@ public class ScheduleFilm {
     @JoinColumn(name = "room")
     private RoomEntity roomEntity;
 
+
+    @ManyToOne
+    @JoinColumn(name = "location")
+    private LocationEntity location;
+
     @Column(name = "date")
     private Long date;
+
+    @Column(name = "startTime")
+    private String startTime;
 }

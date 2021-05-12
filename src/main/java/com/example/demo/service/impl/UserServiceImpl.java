@@ -2,19 +2,17 @@ package com.example.demo.service.impl;
 
 import com.example.demo.exception.AccountExistedException;
 import com.example.demo.model.entity.*;
-import com.example.demo.model.request.OrderTicketRequest;
-import com.example.demo.model.request.UpdateUserRequest;
-import com.example.demo.model.request.UserRequest;
-import com.example.demo.model.response.ListFilmResponse;
-import com.example.demo.model.response.TicketResponse;
-import com.example.demo.model.response.UserResponse;
+import com.example.demo.model.request.*;
+import com.example.demo.model.response.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -24,6 +22,8 @@ public class UserServiceImpl implements UserService {
     FilmRepository filmRepository;
     RoomRepository roomRepository;
     TicketRepository ticketRepository;
+    LocationRepository locationRepository;
+    ScheduleRepository scheduleRepository;
 
     @Override
     public UserResponse createUser(UserRequest userRequest) {
@@ -46,8 +46,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<FilmEntity> getListFilm() {
-        return filmRepository.findAll();
+    public List<ListFilmResponse> getListFilm() {
+        List<ListFilmResponse> listFilmResponses = new ArrayList<>();
+        List<FilmEntity> filmEntities = filmRepository.findAll();
+        for (FilmEntity filmEntity : filmEntities) {
+            ListFilmResponse listFilmResponse = new ListFilmResponse();
+            listFilmResponse.setId(filmEntity.getId());
+            listFilmResponse.setName(filmEntity.getName());
+            listFilmResponse.setImage(filmEntity.getImage());
+            listFilmResponses.add(listFilmResponse);
+        }
+        return listFilmResponses;
     }
 
     @Override
@@ -94,6 +103,74 @@ public class UserServiceImpl implements UserService {
         ticketEntity.setUser(userEntity);
         ticketRepository.save(ticketEntity);
         return ticketResponse;
+    }
+
+    @Override
+    public BookingResponse bookingFilm(Long idFilm) {
+        BookingResponse bookingResponse = new BookingResponse();
+        List<Location> locations = new ArrayList<>();
+        FilmEntity filmEntity = filmRepository.findById(idFilm).get();
+
+        List<ScheduleFilmEntity> filmEntities = scheduleRepository.findAllByFilmEntity(filmEntity);
+        Set<String> location = new HashSet<>();
+
+        for (ScheduleFilmEntity scheduleFilmEntity : filmEntities) {
+            location.add(scheduleFilmEntity.getLocation().getLocation());
+        }
+        bookingResponse.setPoster(filmEntities.get(0).getFilmEntity().getPoster());
+        bookingResponse.setLinkTrailer(filmEntities.get(0).getFilmEntity().getLink());
+        bookingResponse.setName(filmEntities.get(0).getFilmEntity().getName());
+
+        for (String s : location) {
+            List<LocaTionResponse> locaTionResponses = new ArrayList<>();
+            Location location1 = new Location();
+            List<String> startTimes = new ArrayList<>();
+            location1.setLocation(s);
+            for (ScheduleFilmEntity scheduleFilmEntity : filmEntities) {
+                if (scheduleFilmEntity.getLocation().getLocation().equals(s)) {
+                    BookingFilmResponse bookingFilmResponse = new BookingFilmResponse();
+                    LocaTionResponse locaTionResponse = new LocaTionResponse();
+                    locaTionResponse.setDate(scheduleFilmEntity.getDate());
+                    bookingFilmResponse.setId(scheduleFilmEntity.getRoomEntity().getId());
+                    bookingFilmResponse.setRoom(scheduleFilmEntity.getRoomEntity().getName());
+                    bookingFilmResponse.setStartTime(startTimes);
+                    startTimes.add(scheduleFilmEntity.getStartTime());
+                    locaTionResponses.add(locaTionResponse);
+                    location1.setSchedule(locaTionResponses);
+                    locaTionResponse.setRoom(bookingFilmResponse);
+                }
+            }
+            locations.add(location1);
+        }
+        bookingResponse.setLocation(locations);
+        return bookingResponse;
+    }
+
+    @Override
+    public SeatBookingResponse seatBookingResponse(SeatsBookingRequest seatsBookingRequest) {
+        SeatBookingResponse seatBookingResponse = new SeatBookingResponse();
+        RoomEntity roomEntity = roomRepository.getOne(seatsBookingRequest.getIdRoom());
+        ScheduleFilmEntity scheduleFilmEntity = scheduleRepository.findAllByRoomEntityAndStartTime(roomEntity, seatsBookingRequest.getTime());
+
+        seatBookingResponse.setFilmName(scheduleFilmEntity.getFilmEntity().getName());
+        seatBookingResponse.setTime(scheduleFilmEntity.getFilmEntity().getTime());
+        List<SeatsResponse> seats = new ArrayList<>();
+        for (int i = 1; i <= roomEntity.getMaxSeats(); i++) {
+            SeatsResponse seatsResponse = new SeatsResponse();
+            if (roomEntity.getEmptySeats().contains(String.valueOf(i))) {
+                seatsResponse.setNumber(i);
+                seatsResponse.setStatus(true);
+            } else if (roomEntity.getSelectedSeat().contains(String.valueOf(i))) {
+                seatsResponse.setNumber(i);
+                seatsResponse.setStatus(false);
+            } else {
+                seatsResponse.setNumber(i);
+                seatsResponse.setStatus(true);
+            }
+            seats.add(seatsResponse);
+        }
+        seatBookingResponse.setSeats(seats);
+        return seatBookingResponse;
     }
 
     private UserResponse userResponse(UserEntity userEntity) {

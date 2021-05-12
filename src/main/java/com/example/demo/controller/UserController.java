@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.entity.FilmEntity;
-import com.example.demo.model.request.OrderTicketRequest;
-import com.example.demo.model.request.UpdateUserRequest;
-import com.example.demo.model.request.UserRequest;
+import com.example.demo.model.request.*;
 import com.example.demo.model.response.ListFilmResponse;
+import com.example.demo.model.response.SeatBookingResponse;
 import com.example.demo.model.response.TicketResponse;
 import com.example.demo.model.response.UserResponse;
 import com.example.demo.service.UserService;
@@ -29,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/get-all-film")
-    public ResponseEntity<List<FilmEntity>> getAllFilm() {
+    public ResponseEntity<List<ListFilmResponse>> getAllFilm() {
         return ResponseEntity.ok(userService.getListFilm());
     }
 
@@ -47,5 +46,15 @@ public class UserController {
     @PostMapping("/order")
     public ResponseEntity<TicketResponse> order(@RequestBody OrderTicketRequest updateUserRequest) {
         return ResponseEntity.ok(userService.order(updateUserRequest));
+    }
+
+    @GetMapping("/booking-film/{id}")
+    public ResponseEntity<BookingResponse> bookingFilm(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.bookingFilm(id));
+    }
+
+    @PostMapping("/seat-booking")
+    public ResponseEntity<SeatBookingResponse> seatBooking(@RequestBody SeatsBookingRequest updateUserRequest) {
+        return ResponseEntity.ok(userService.seatBookingResponse(updateUserRequest));
     }
 }

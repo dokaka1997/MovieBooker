@@ -5,8 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ListFilmResponse {
-    private Long id;
-    private String name;
-    private String image;
+public class SeatsResponse {
+    private int number;
+    public boolean status;
 }

@@ -1,17 +1,14 @@
-package com.example.demo.model.entity;
+package com.example.demo.model.response;
 
 import com.example.demo.enumeration.FilmType;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "film")
-public class FilmEntity {
+public class FilmDetailResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,18 +43,15 @@ public class FilmEntity {
     @Column(name = "introduce")
     private String introduce;
 
-    @Column(name = "poster")
-    private String poster;
 
-    @OneToMany
-    @JoinColumn(name = "image_film")
-    private List<ImageFilmEntity> imageInFilm;
+    @Column(name = "imageInFilm")
+    private String imageInFilm;
 
-    @OneToMany
-    @JoinColumn(name = "actor")
-    private List<ActorEntity> actor;
+    @Column(name = "actor")
+    private String actor;
 
-    @OneToMany
-    @JoinColumn(name = "crew")
-    private List<CrewEntity> crew;
+    @Column(name = "crew")
+    private String crew;
+
+
 }
