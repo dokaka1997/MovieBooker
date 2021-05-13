@@ -28,6 +28,7 @@ public class LoginServiceImpl implements LoginService {
             loginResponse.setToken(token);
             loginResponse.setRole(userEntity.get().getRoleEntity().getId());
             loginResponse.setName(loginRequest.getUsername());
+            loginResponse.setUserId(userEntity.get().getId());
             return loginResponse;
         }
     }

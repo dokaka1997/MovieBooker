@@ -1,6 +1,9 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.LoginFalseException;
 import com.example.demo.model.entity.*;
+import com.example.demo.model.request.AddRoomRequest;
+import com.example.demo.model.response.RoomResponse;
 import com.example.demo.repository.FilmRepository;
 import com.example.demo.repository.RoomRepository;
 import com.example.demo.repository.TicketRepository;
@@ -9,6 +12,7 @@ import com.example.demo.service.ManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,12 +45,36 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public RoomEntity room(RoomEntity roomEntity) {
+    public Boolean deleteRoom(Long id) {
+        try {
+            roomRepository.deleteById(id);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
+    @Override
+    public RoomEntity room(AddRoomRequest addRoomRequest) {
+        RoomEntity roomEntity = new RoomEntity();
+        roomEntity.setName(addRoomRequest.getName());
+        roomEntity.setId(addRoomRequest.getId());
+        roomEntity.setMaxSeats(addRoomRequest.getMaxSeats());
+        roomEntity.setSelectedSeat(addRoomRequest.getSelectedSeat());
+        roomEntity.setEmptySeats(addRoomRequest.getEmptySeats());
+        List<LocationEntity> locationEntities = new ArrayList<>();
+        LocationEntity locationEntity = new LocationEntity();
+        locationEntity.setLocation(addRoomRequest.getLocation());
+        locationEntities.add(locationEntity);
+        roomEntity.setLocation(locationEntities);
         return roomRepository.save(roomEntity);
     }
 
     @Override
     public UserEntity user(UserEntity userEntity) {
+        if (!userRepository.findByUsername(userEntity.getUsername()).isEmpty() && userEntity.getId() == null) {
+            throw new LoginFalseException("Username existed");
+        }
         RoleEntity roleEntity = new RoleEntity();
         roleEntity.setId(2L);
         roleEntity.setName("Employee");
@@ -69,7 +97,38 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public List<TicketEntity> getAllTicket() {
-        return ticketRepository.findAll();
+    public Integer getAllTicket() {
+        return ticketRepository.findAllByPayment(true).size();
+    }
+
+    @Override
+    public List<FilmEntity> getAllFilm() {
+        return filmRepository.findAll();
+    }
+
+    @Override
+    public List<RoomResponse> getAllRoom() {
+        List<RoomResponse> roomResponses = new ArrayList<>();
+        List<RoomEntity> roomEntities = roomRepository.findAll();
+        for (RoomEntity roomEntity : roomEntities) {
+            RoomResponse roomResponse = new RoomResponse();
+            roomResponse.setId(roomEntity.getId());
+            roomResponse.setName(roomEntity.getName());
+
+            if (roomEntity.getEmptySeats() != null) {
+                roomResponse.setEmptySeats(roomEntity.getEmptySeats());
+            }
+            if (roomEntity.getSelectedSeat() != null) {
+                roomResponse.setSelectedSeat(roomEntity.getSelectedSeat());
+            }
+
+            roomResponse.setMaxSeats(roomEntity.getMaxSeats());
+            if (roomEntity.getLocation().size() > 0) {
+                roomResponse.setLocation(roomEntity.getLocation().get(0).getLocation());
+
+            }
+            roomResponses.add(roomResponse);
+        }
+        return roomResponses;
     }
 }

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,12 +16,12 @@ public class LocationEntity {
 
     @Column(name = "location")
     private String location;
-
-    @OneToMany
-    @JoinColumn(name = "room")
-    private List<RoomEntity> room;
-
-    @OneToMany
-    @JoinColumn(name = "schedule")
-    private List<ScheduleFilmEntity> schedule;
+//
+//    @OneToMany
+//    @JoinColumn(name = "room")
+//    private List<RoomEntity> room;
+//
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "schedule")
+//    private List<ScheduleFilmEntity> schedule;
 }

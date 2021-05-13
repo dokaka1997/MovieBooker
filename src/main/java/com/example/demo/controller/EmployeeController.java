@@ -1,15 +1,18 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.entity.TicketEntity;
 import com.example.demo.model.response.TicketResponse;
 import com.example.demo.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @CrossOrigin
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/staff")
 public class EmployeeController {
     private EmployeeService employeeService;
 
@@ -26,5 +29,10 @@ public class EmployeeController {
     @PostMapping("/payment-ticket/{id}")
     public ResponseEntity<TicketResponse> paymentTicket(@PathVariable Long id) {
         return ResponseEntity.ok(employeeService.paymentTicket(id));
+    }
+
+    @GetMapping("/ticket")
+    public ResponseEntity<List<TicketResponse>> getAllTicket() {
+        return ResponseEntity.ok(employeeService.getAllTicket());
     }
 }

@@ -1,6 +1,5 @@
 package com.example.demo.model.entity;
 
-import com.example.demo.enumeration.FilmType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,8 +18,8 @@ public class FilmEntity {
     @Column(name = "name")
     private String name;
 
-    @Enumerated(value = EnumType.STRING)
-    private FilmType filmType;
+    @Column(name = "filmType")
+    private String filmType;
 
     @Column(name = "age_limit")
     private int ageLimit;
@@ -49,15 +48,13 @@ public class FilmEntity {
     @Column(name = "poster")
     private String poster;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_film")
     private List<ImageFilmEntity> imageInFilm;
-
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "actor")
     private List<ActorEntity> actor;
-
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "crew")
     private List<CrewEntity> crew;
 }

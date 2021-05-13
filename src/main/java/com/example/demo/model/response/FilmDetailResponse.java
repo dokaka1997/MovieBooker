@@ -1,6 +1,5 @@
 package com.example.demo.model.response;
 
-import com.example.demo.enumeration.FilmType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,8 +15,8 @@ public class FilmDetailResponse {
     @Column(name = "name")
     private String name;
 
-    @Enumerated(value = EnumType.STRING)
-    private FilmType filmType;
+    @Column(name = "filmType")
+    private String filmType;
 
     @Column(name = "age_limit")
     private int ageLimit;

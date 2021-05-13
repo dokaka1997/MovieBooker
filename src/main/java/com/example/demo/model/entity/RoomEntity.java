@@ -29,8 +29,8 @@ public class RoomEntity {
     @Column(name = "selected_seat")
     private String selectedSeat;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "localtion")
-    private List<LocationEntity> localtion;
+    private List<LocationEntity> location;
 
 }

@@ -9,10 +9,7 @@ import com.example.demo.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @AllArgsConstructor
 @Service
@@ -81,27 +78,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public TicketResponse order(OrderTicketRequest orderTicketRequest) {
-        UserEntity userEntity = userRepository.findById(orderTicketRequest.getCustomerName()).get();
-        FilmEntity filmEntity = filmRepository.getOne(orderTicketRequest.getFilm());
-        RoomEntity roomEntity = roomRepository.getOne(orderTicketRequest.getRoom());
+        UserEntity userEntity = userRepository.findById(orderTicketRequest.getUserId()).get();
+        RoomEntity roomEntity = roomRepository.getOne(orderTicketRequest.getRoomId());
+        FilmEntity filmEntity = scheduleRepository.findAllByRoomEntityAndStartTime(roomEntity, orderTicketRequest.getStartTime()).getFilmEntity();
         TicketResponse ticketResponse = new TicketResponse();
         ticketResponse.setCustomerName(userEntity.getName());
         ticketResponse.setFilm(filmEntity.getName());
-        ticketResponse.setOrderDate(orderTicketRequest.getOrderDate());
+        ticketResponse.setTimeStart(orderTicketRequest.getStartTime());
+        Date d = new Date();
+        long milliseconds = d.getTime();
+        ticketResponse.setOrderDate(milliseconds);
         ticketResponse.setRoom(roomEntity.getName());
-        ticketResponse.setPrice(filmEntity.getPrice());
-        ticketResponse.setSeatsNumber(orderTicketRequest.getSeatsNumber());
+        ticketResponse.setPrice(String.valueOf(filmEntity.getPrice()));
+        ticketResponse.setSeatsNumber(orderTicketRequest.getSeats().toString());
         ticketResponse.setPayment(orderTicketRequest.isPayment());
 
         TicketEntity ticketEntity = new TicketEntity();
-        ticketEntity.setNumberSeats(ticketResponse.getSeatsNumber());
+        ticketEntity.setNumberSeats(orderTicketRequest.getSeats().toString());
         ticketEntity.setPayment(ticketResponse.isPayment());
-        ticketEntity.setPrice(String.valueOf(filmEntity.getPrice()));
+        int price = filmEntity.getPrice() * orderTicketRequest.getSeats().size();
+        ticketEntity.setPrice(String.valueOf(price));
         ticketEntity.setTimeStart(ticketResponse.getTimeStart());
         ticketEntity.setFilm(filmEntity);
         ticketEntity.setRoom(roomEntity);
         ticketEntity.setUser(userEntity);
-        ticketRepository.save(ticketEntity);
+        ticketEntity.setDate(milliseconds);
+        ticketEntity = ticketRepository.save(ticketEntity);
+        ticketResponse.setId(ticketEntity.getId());
         return ticketResponse;
     }
 

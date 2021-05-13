@@ -7,10 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TicketResponse {
-
-    private int price;
+    private Long id;
+    private String price;
     private boolean payment;
-    private Long timeStart;
+    private String timeStart;
     private String customerName;
     private Long orderDate;
     private String film;

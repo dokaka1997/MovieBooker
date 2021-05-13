@@ -2,8 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.model.entity.FilmEntity;
 import com.example.demo.model.entity.RoomEntity;
-import com.example.demo.model.entity.TicketEntity;
 import com.example.demo.model.entity.UserEntity;
+import com.example.demo.model.request.AddRoomRequest;
+import com.example.demo.model.response.RoomResponse;
 import com.example.demo.service.ManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,28 +30,44 @@ public class ManagerController {
     }
 
     @PostMapping("/room")
-    public ResponseEntity<RoomEntity> Room(@RequestBody RoomEntity roomEntity) {
+    public ResponseEntity<RoomEntity> Room(@RequestBody AddRoomRequest roomEntity) {
         return ResponseEntity.ok(managerService.room(roomEntity));
     }
 
-    @PostMapping("/employee")
+    @PostMapping("/staff")
     public ResponseEntity<UserEntity> employee(@RequestBody UserEntity userEntity) {
         return ResponseEntity.ok(managerService.user(userEntity));
     }
 
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/staff/{id}")
     public ResponseEntity<Boolean> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok(managerService.deleteUser(id));
     }
 
-    @GetMapping("/user")
+    @GetMapping("/staff")
     public ResponseEntity<List<UserEntity>> getAllEmployee() {
         return ResponseEntity.ok(managerService.getAllEmployee());
     }
 
     @GetMapping("/ticket")
-    public ResponseEntity<List<TicketEntity>> getAllTicket() {
+    public ResponseEntity<Integer> getAllTicket() {
         return ResponseEntity.ok(managerService.getAllTicket());
+    }
+
+
+    @GetMapping("/film")
+    public ResponseEntity<List<FilmEntity>> getAllFilm() {
+        return ResponseEntity.ok(managerService.getAllFilm());
+    }
+
+    @GetMapping("/room")
+    public ResponseEntity<List<RoomResponse>> getAllRoom() {
+        return ResponseEntity.ok(managerService.getAllRoom());
+    }
+
+    @DeleteMapping("/room/{id}")
+    public ResponseEntity<Boolean> deleteRoom(@PathVariable Long id) {
+        return ResponseEntity.ok(managerService.deleteRoom(id));
     }
 }

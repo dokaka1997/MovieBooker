@@ -37,7 +37,7 @@ public class TicketEntity {
     private String numberSeats;
 
     @Column(name = "time_start")
-    private Long timeStart;
+    private String timeStart;
 
     @Column(name = "date")
     private Long date;

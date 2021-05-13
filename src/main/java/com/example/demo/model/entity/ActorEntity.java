@@ -22,6 +22,6 @@ public class ActorEntity {
     private String image;
 
     @Column(name = "nameInfilm")
-    private String nameInfilm;
+    private String nameInFilm;
 
 }
