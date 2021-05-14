@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.entity.TicketEntity;
 import com.example.demo.model.response.TicketResponse;
 import com.example.demo.service.EmployeeService;
 import lombok.AllArgsConstructor;

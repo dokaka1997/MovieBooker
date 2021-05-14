@@ -14,7 +14,7 @@ public class ScheduleFilmEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "film")
     private FilmEntity filmEntity;
 
@@ -23,7 +23,7 @@ public class ScheduleFilmEntity {
     private RoomEntity roomEntity;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location")
     private LocationEntity location;
 

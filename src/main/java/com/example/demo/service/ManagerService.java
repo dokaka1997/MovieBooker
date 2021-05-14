@@ -1,16 +1,14 @@
 package com.example.demo.service;
 
-import com.example.demo.model.entity.FilmEntity;
-import com.example.demo.model.entity.RoomEntity;
-import com.example.demo.model.entity.TicketEntity;
-import com.example.demo.model.entity.UserEntity;
+import com.example.demo.model.entity.*;
+import com.example.demo.model.request.AddFilmRequest;
 import com.example.demo.model.request.AddRoomRequest;
 import com.example.demo.model.response.RoomResponse;
 
 import java.util.List;
 
 public interface ManagerService {
-    FilmEntity addFilm(FilmEntity filmEntity);
+    AddFilmRequest addFilm(AddFilmRequest filmEntity);
 
     Boolean deleteFilm(Long id);
 
@@ -29,4 +27,6 @@ public interface ManagerService {
     List<FilmEntity> getAllFilm();
 
     List<RoomResponse> getAllRoom();
+
+    List<LocationEntity> getAllLocation();
 }

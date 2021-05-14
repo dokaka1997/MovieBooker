@@ -2,12 +2,10 @@ package com.example.demo.service.impl;
 
 import com.example.demo.exception.LoginFalseException;
 import com.example.demo.model.entity.*;
+import com.example.demo.model.request.AddFilmRequest;
 import com.example.demo.model.request.AddRoomRequest;
 import com.example.demo.model.response.RoomResponse;
-import com.example.demo.repository.FilmRepository;
-import com.example.demo.repository.RoomRepository;
-import com.example.demo.repository.TicketRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.*;
 import com.example.demo.service.ManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,17 +25,53 @@ public class ManagerServiceImpl implements ManagerService {
 
     TicketRepository ticketRepository;
 
+    LocationRepository locationRepository;
+
+    ScheduleRepository scheduleRepository;
+
+    ActorRepository actorRepository;
+
     @Override
-    public FilmEntity addFilm(FilmEntity filmEntity) {
-        FilmEntity filmEntityResponse = filmRepository.save(filmEntity);
-        return filmEntityResponse;
+    public AddFilmRequest addFilm(AddFilmRequest addFilmRequest) {
+        FilmEntity filmEntity = new FilmEntity();
+        if (addFilmRequest.getId() != null) {
+            filmEntity = filmRepository.getOne(addFilmRequest.getId());
+        }
+        filmEntity.setName(addFilmRequest.getName());
+        filmEntity.setFilmType(addFilmRequest.getFilmType());
+        filmEntity.setAgeLimit(addFilmRequest.getAgeLimit());
+        filmEntity.setImage(addFilmRequest.getImage());
+        filmEntity.setDateOfpublication(addFilmRequest.getDate());
+        filmEntity.setPrice(addFilmRequest.getPrice());
+        filmEntity.setTime(addFilmRequest.getTime());
+        filmEntity.setLink(addFilmRequest.getLink());
+        filmEntity.setLanguage(addFilmRequest.getLanguage());
+        filmEntity.setIntroduce(addFilmRequest.getIntroduce());
+        filmEntity.setPoster(addFilmRequest.getPoster());
+        filmEntity.setImageInFilm(addFilmRequest.getImageInFilm());
+        filmEntity.setStartTime(addFilmRequest.getStartTime());
+        filmEntity.setActor(addFilmRequest.getActor());
+        filmEntity.setCrew(addFilmRequest.getCrew());
+        filmEntity = filmRepository.save(filmEntity);
+        ScheduleFilmEntity scheduleFilmEntity = new ScheduleFilmEntity();
+        if (addFilmRequest.getId() != null) {
+            scheduleFilmEntity = scheduleRepository.findAllByFilmEntity(filmEntity).get(0);
+        }
+        scheduleFilmEntity.setFilmEntity(filmEntity);
+        scheduleFilmEntity.setDate(addFilmRequest.getDate());
+        scheduleFilmEntity.setRoomEntity(roomRepository.getOne(addFilmRequest.getRoomId()));
+        scheduleFilmEntity.setLocation(locationRepository.getOne(addFilmRequest.getLocation()));
+        scheduleFilmEntity.setStartTime(addFilmRequest.getStartTime().toString());
+        scheduleRepository.save(scheduleFilmEntity);
+        return addFilmRequest;
     }
 
     @Override
     public Boolean deleteFilm(Long id) {
         Optional<FilmEntity> filmEntity = filmRepository.findById(id);
         if (filmEntity.isPresent()) {
-            filmRepository.delete(filmEntity.get());
+            filmEntity.get().setStatus(false);
+            filmRepository.save(filmEntity.get());
             return true;
         } else {
             return false;
@@ -103,7 +137,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public List<FilmEntity> getAllFilm() {
-        return filmRepository.findAll();
+        return filmRepository.getAllByStatusIs(true);
     }
 
     @Override
@@ -130,5 +164,10 @@ public class ManagerServiceImpl implements ManagerService {
             roomResponses.add(roomResponse);
         }
         return roomResponses;
+    }
+
+    @Override
+    public List<LocationEntity> getAllLocation() {
+        return locationRepository.findAll();
     }
 }

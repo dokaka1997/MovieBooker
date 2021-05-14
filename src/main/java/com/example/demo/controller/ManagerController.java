@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.entity.FilmEntity;
+import com.example.demo.model.entity.LocationEntity;
 import com.example.demo.model.entity.RoomEntity;
 import com.example.demo.model.entity.UserEntity;
+import com.example.demo.model.request.AddFilmRequest;
 import com.example.demo.model.request.AddRoomRequest;
 import com.example.demo.model.response.RoomResponse;
 import com.example.demo.service.ManagerService;
@@ -20,7 +22,7 @@ public class ManagerController {
     ManagerService managerService;
 
     @PostMapping("/film")
-    public ResponseEntity<FilmEntity> addFilm(@RequestBody FilmEntity filmEntity) {
+    public ResponseEntity<AddFilmRequest> addFilm(@RequestBody AddFilmRequest filmEntity) {
         return ResponseEntity.ok(managerService.addFilm(filmEntity));
     }
 
@@ -69,5 +71,10 @@ public class ManagerController {
     @DeleteMapping("/room/{id}")
     public ResponseEntity<Boolean> deleteRoom(@PathVariable Long id) {
         return ResponseEntity.ok(managerService.deleteRoom(id));
+    }
+
+    @GetMapping("/location")
+    public ResponseEntity<List<LocationEntity>> getAllLocation() {
+        return ResponseEntity.ok(managerService.getAllLocation());
     }
 }

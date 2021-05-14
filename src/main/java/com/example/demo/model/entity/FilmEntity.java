@@ -28,7 +28,7 @@ public class FilmEntity {
     private String image;
 
     @Column(name = "date_of_publication")
-    private String dateOfpublication;
+    private Long dateOfpublication;
 
     @Column(name = "price")
     private int price;
@@ -51,10 +51,18 @@ public class FilmEntity {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_film")
     private List<ImageFilmEntity> imageInFilm;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "actor")
     private List<ActorEntity> actor;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "crew")
     private List<CrewEntity> crew;
+
+    @Column(name = "status")
+    private boolean status = true;
+
+    @Column(name = "startTime")
+    private Long startTime;
 }

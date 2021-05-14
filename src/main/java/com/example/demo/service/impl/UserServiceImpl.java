@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<ListFilmResponse> getListFilm() {
         List<ListFilmResponse> listFilmResponses = new ArrayList<>();
-        List<FilmEntity> filmEntities = filmRepository.findAll();
+        List<FilmEntity> filmEntities = filmRepository.getAllByStatusIs(true);
         for (FilmEntity filmEntity : filmEntities) {
             ListFilmResponse listFilmResponse = new ListFilmResponse();
             listFilmResponse.setId(filmEntity.getId());
