@@ -1,0 +1,96 @@
+.page-container {
+  width: 100%;
+  height: calc(100% - 56px);
+  display: table;
+  table-layout: fixed;
+}
+.page-container .sidebar-menu {
+  display: table-cell;
+  vertical-align: top;
+  background: #ff4444;
+  width: 280px;
+  position: relative;
+  z-index: 100;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.page-container .sidebar-menu .sidebar-menu-inner {
+  position: relative;
+}
+.page-container .sidebar-menu .logo-env {
+  width: 100%;
+  padding: 35px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.page-container .sidebar-menu #main-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.page-container .sidebar-menu #main-menu li {
+  position: relative;
+  margin: 0;
+  font-size: 12px;
+  border-bottom: 1px solid rgb(236 153 153 / 70%);
+}
+.page-container .sidebar-menu #main-menu li a {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 2;
+  -webkit-transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+  -moz-transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+  -o-transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+  transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+}
+.page-container .sidebar-menu #main-menu li a i {
+  top: 1px;
+  display: inline-block;
+}
+.page-container .sidebar-menu #main-menu li i {
+  position: relative;
+  font-size: 15px;
+  margin-right: 5px;
+}
+.page-container .sidebar-menu #main-menu li a span {
+  -webkit-transition: 350ms opacity ease-in-out;
+  -moz-transition: 350ms opacity ease-in-out;
+  -o-transition: 350ms opacity ease-in-out;
+  transition: 350ms opacity ease-in-out;
+}
+.page-container .sidebar-menu #main-menu li a:hover {
+  background-color: rgb(230 21 21 / 30%);
+  color: #fff;
+}
+a:hover {
+  text-decoration: none;
+  color: #818da2;
+}
+@media (min-width: 992px) {
+  .page-container {
+    height: calc(100% - 86px);
+  }
+}
+.page-container .sidebar-menu #main-menu li .admin-active {
+  background-color: #bd0606;
+  color: #fff;
+}
+.page-container .main-content {
+  position: relative;
+  display: table-cell;
+  vertical-align: top;
+  padding: 20px;
+  background: #ffffff;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

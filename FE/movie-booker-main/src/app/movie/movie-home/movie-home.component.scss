@@ -1,0 +1,88 @@
+.logo {
+  width: 100px;
+}
+
+q {
+  font-style: italic;
+  font-size: 1.2rem;
+  quotes: "« " " »";
+}
+
+body {
+  padding-top: 20px;
+}
+
+.carousel {
+  width: 100%;
+}
+
+.slide-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .slide-box img {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .slide-box img {
+    -ms-flex: 0 0 33.3333%;
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+  }
+}
+
+@media (min-width: 992px) {
+  .slide-box img {
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 0.5rem;
+}
+
+.btn-cart {
+  border: 1px solid #eeeeee;
+  width: 50px;
+  height: 50px;
+}
+
+.prs_upcom_movie_content_box_inner {
+  float: left;
+  width: 75%;
+}
+.prs_upcom_movie_content_box_inner_icon {
+  float: left;
+  width: 25%;
+  padding-top: 10px;
+}
+
+// .prs_upcom_movie_content_box {
+//   box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 10%);
+// }
+
+.card {
+  background-color: transparent;
+  border: none;
+  border-radius: none;
+}
+.card-body {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 1px 5px 0px rgb(0 0 0 / 10%);
+}
+
+.card:hover .card-body {
+  box-shadow: 0px 1px 20px 0px rgb(0 0 0 / 10%);
+}

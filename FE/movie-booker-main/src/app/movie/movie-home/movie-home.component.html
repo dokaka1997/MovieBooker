@@ -1,0 +1,41 @@
+<!-- <div class="container-fluid">
+  <div class="jumbotron text-center">
+    <h1>
+      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo" />
+      <span translate>Hello world !</span>
+    </h1>
+    <app-loader [isLoading]="isLoading"></app-loader>
+    <q [hidden]="isLoading">{{ quote }}</q>
+  </div>
+</div> -->
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 80px">
+        <div class="prs_heading_section_wrapper">
+          <h2>Upcoming Movies</h2>
+        </div>
+      </div>
+      <owl-carousel-o [options]="customOptions">
+        <ng-template carouselSlide *ngFor="let m of listMovie; let i = index"
+          ><div class="card m-3">
+            <div class=""><img class="card-img-top" src="{{ m.image }}" alt="Card image cap" /></div>
+            <div class="card-body">
+              <div class="prs_upcom_movie_content_box">
+                <div class="prs_upcom_movie_content_box_inner">
+                  <h4>{{ m.name }}</h4>
+                  <p><a [routerLink]="['/movies/movie-detail', m.id]">View detail</a></p>
+                </div>
+                <div class="prs_upcom_movie_content_box_inner_icon">
+                  <a [routerLink]="['/movies/movie-booking', m.id]" class="btn btn-cart"
+                    ><i class="fa fa-shopping-cart"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+</div>

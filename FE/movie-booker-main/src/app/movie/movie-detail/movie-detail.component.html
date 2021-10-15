@@ -1,0 +1,107 @@
+<div class="container-fluid" *ngIf="!!movie">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 80px">
+        <div class="prs_heading_section_wrapper">
+          <h2>Overview movie</h2>
+        </div>
+      </div>
+      <div class="over">
+        <div class="movie">
+          <img class="card-img-top" src="{{ movie.image }}" alt="Card image cap" />
+        </div>
+        <div class="des">
+          <h3 class="movie-name">{{ movie.name }}</h3>
+          <div class="region">{{ movie.language }}</div>
+          <div class="movie-type">
+            <span>{{ movie.filmType }}</span>
+          </div>
+          <div class="booking">
+            <button class="btn btn-cart" (click)="bookTicket()">Booking Online</button>
+          </div>
+        </div>
+      </div>
+      <div class="movie-details">
+        <div class="header">
+          <h3 class="title">PHOTOS</h3>
+        </div>
+      </div>
+      <div class="details-photos">
+        <owl-carousel-o [options]="customOptions">
+          <ng-template carouselSlide *ngFor="let p of movie.imageInFilm"
+            ><div class="card m-3">
+              <img class="card-img-top" src="{{ p.linkImage }}" alt="Card image cap" />
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+      <div class="tab-area">
+        <div class="tab-item active">
+          <div class="item">
+            <h5 class="sub-title">introduce</h5>
+            <p>
+              {{ movie.introduce }}
+            </p>
+          </div>
+          <div class="item">
+            <div class="header">
+              <h5 class="sub-title">Cast</h5>
+              <div class="navigation">
+                <div class="cast-prev-2" (click)="cast.prev()"><i class="fa fa-angle-double-left"></i></div>
+                <div class="cast-next-2" (click)="cast.next()"><i class="fas fa-angle-double-right"></i></div>
+              </div>
+            </div>
+            <div class="details-photos">
+              <owl-carousel-o [options]="customOptionsAuto" #cast>
+                <ng-template carouselSlide *ngFor="let c of movie.actor"
+                  ><div class="cast-item">
+                    <div class="cast-thumb">
+                      <a>
+                        <img src="{{ c.image }}" alt="cast" />
+                      </a>
+                    </div>
+                    <div class="cast-content">
+                      <h6 class="cast-title">
+                        <a>{{ c.name }}</a>
+                      </h6>
+                      <span class="cate">actor</span>
+                      <p>As {{ c.nameInfilm }}</p>
+                    </div>
+                  </div>
+                </ng-template>
+              </owl-carousel-o>
+            </div>
+          </div>
+          <div class="item">
+            <div class="header">
+              <h5 class="sub-title">Crew</h5>
+              <div class="navigation">
+                <div class="cast-prev-2" (click)="crew.prev()"><i class="fa fa-angle-double-left"></i></div>
+                <div class="cast-next-2" (click)="crew.next()"><i class="fas fa-angle-double-right"></i></div>
+              </div>
+            </div>
+            <div class="details-photos">
+              <owl-carousel-o [options]="customOptionsAuto" #crew>
+                <ng-template carouselSlide *ngFor="let c of movie.crew"
+                  ><div class="cast-item">
+                    <div class="cast-thumb">
+                      <a>
+                        <img src="{{ c.image }}" alt="cast" />
+                      </a>
+                    </div>
+                    <div class="cast-content">
+                      <h6 class="cast-title">
+                        <a>{{ c.name }}</a>
+                      </h6>
+                      <span class="cate">{{ c.role }}</span>
+                    </div>
+                  </div>
+                </ng-template>
+              </owl-carousel-o>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<ng-container *ngIf="!!room">
+  <div class="st_bt_top_header_wrapper">
+    <div class="container container_seat">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
+          <div class="">
+            <a routerLink="/movies/movie-booking" class="btn-back"> Back</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="st_bt_top_center_heading text-center">
+            <h3>{{ room.filmName }} - ({{ room.time }})</h3>
+            <h4>Today, 19 Dec, 10:00 PM</h4>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 mt-2">
+          <div class="float-right btn-close">
+            <a routerLink="/movies/movie-booking"><i class="fa fa-times"></i></a>
+          </div>
+          <div class="float-right">
+            <a class="btn-proceed" (click)="bookTicket()" [ngClass]="bookedSeats.length <= 0 ? 'disabled' : ''"
+              >Proceed to Pay</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="st_seatlayout_main_wrapper">
+    <div class="container container_seat">
+      <div class="st_seat_lay_heading">
+        <h3>Ariesplex SL Cinemas</h3>
+      </div>
+      <div class="st_seat_full_container">
+        <div class="st_seat_lay_economy_wrapper">
+          <div class="screen">
+            <img src="assets/images/screen.png" />
+          </div>
+          <div class="st_seat_lay_economy_heading">
+            <h3>Economy</h3>
+          </div>
+
+          <div class="st_seat_lay_row">
+            <ul>
+              <li class="st_seat_heading_row">D</li>
+              <li
+                [ngClass]="s.status ? 'seat_disable' : ''"
+                *ngFor="let s of room.seats; let i = index"
+                [style.margin-left]="i === 5 || i === 13 ? '50px' : null"
+              >
+                <input type="checkbox" id="s{{ i }}" (change)="selectSeat($event.target.checked, s.number, s.status)" />
+                <label for="s{{ i }}" [attr.data-text]="s.number"></label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

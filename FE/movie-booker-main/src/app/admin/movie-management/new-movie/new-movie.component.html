@@ -1,0 +1,251 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Add a new Movie</h4>
+</div>
+<div class="modal-body">
+  <div class="d-flex">
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-name" class="col-sm-4 col-form-label">Movie Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="movieName" placeholder="Enter movie name" />
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-type" class="col-sm-4 col-form-label">Type</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="type" placeholder="Enter movie type" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-image" class="col-sm-4 col-form-label">Image</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="image" placeholder="Enter iamge url" />
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-price" class="col-sm-4 col-form-label">Price</label>
+        <div class="col-sm-8">
+          <input type="number" class="form-control" [(ngModel)]="price" placeholder="Enter price" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-time" class="col-sm-4 col-form-label">Duration</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="duration" placeholder="Enter time" />
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-language" class="col-sm-4 col-form-label">Language</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="language" placeholder="Enter movie language" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-introduce" class="col-sm-4 col-form-label">Introduce</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="introduce" placeholder="Enter movie introduce" />
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-poster" class="col-sm-4 col-form-label">Poster</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="poster" placeholder="Enter movie poster" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-introduce" class="col-sm-4 col-form-label">Date Show</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="yyyy-mm-dd"
+              name="dp"
+              [(ngModel)]="datePub"
+              ngbDatepicker
+              #d="ngbDatepicker"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                <i class="fa fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-poster" class="col-sm-4 col-form-label">Time Show</label>
+        <div class="col-sm-8">
+          <input
+            type="number"
+            min="0"
+            max="23"
+            class="form-control"
+            [value]="timeShow"
+            (input)="limitTime($event)"
+            placeholder="Enter time show"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-introduce" class="col-sm-4 col-form-label">Location</label>
+        <div class="col-sm-8">
+          <select class="form-control" [(ngModel)]="location" placeholder="Enter movie location">
+            <option *ngFor="let l of listLocation" value="{{ l.id }}">{{ l.location }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-poster" class="col-sm-4 col-form-label">Room</label>
+        <div class="col-sm-8">
+          <select class="form-control" [(ngModel)]="roomId" placeholder="Enter movie room">
+            <option *ngFor="let r of listRoom" value="{{ r.id }}">{{ r.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="col-6">
+      <div class="form-group row">
+        <label for="m-introduce" class="col-sm-4 col-form-label">Link Trailer</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" [(ngModel)]="linkTrailer" placeholder="Enter link trailer" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div class="col-12">
+      <div class="form-group row">
+        <div class="col-sm-3 d-flex">
+          <label for="m-image-in-film" class="col-8 pl-0 col-form-label">Image In Film </label>
+          <div class="col-4">
+            <button type="button" class="btn shadow-lg float-left" (click)="addFilmImage()">
+              <i class="fa fa-plus-circle"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-9 d-flex offset-3 mt-1" *ngFor="let im of imageInFilm; let i = index">
+          <div class="col-10">
+            <input type="text" class="form-control" placeholder="Enter image in film url" [(ngModel)]="im.linkImage" />
+          </div>
+          <div class="col-2">
+            <button type="button" class="btn shadow-lg" (click)="removeFilmImage(i)">
+              <i class="fa fa-minus-circle"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-block">
+    <div class="text-center mb-2">
+      <strong>Actor</strong>
+      <button type="button" class="btn shadow-lg" (click)="addActor()"><i class="fa fa-plus-circle"></i></button>
+    </div>
+    <div class="d-flex" *ngFor="let a of ACTORS; let i = index">
+      <div class="col-11 d-flex">
+        <div class="col-4">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [(ngModel)]="a.name" placeholder="Enter actor name" />
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Image url</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [(ngModel)]="a.image" placeholder="Enter actor image url" />
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group row">
+            <label for="m-image-in-film" class="col-sm-4 col-form-label">Name as</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [(ngModel)]="a.nameInFilm" placeholder="Enter name in film" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-1">
+        <button type="button" class="btn shadow-lg" (click)="removeActor(i)"><i class="fa fa-minus-circle"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="d-block">
+    <div class="text-center mb-2">
+      <strong>Crew</strong>
+      <button type="button" class="btn shadow-lg" (click)="addCrew()"><i class="fa fa-plus-circle"></i></button>
+    </div>
+    <div class="d-flex" *ngFor="let c of CREWS; let i = index">
+      <div class="col-11 d-flex">
+        <div class="col-4">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [(ngModel)]="c.name" placeholder="Enter crew name" />
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Image url</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [(ngModel)]="c.image" placeholder="Enter crew image url" />
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group row">
+            <label for="m-image-in-film" class="col-sm-4 col-form-label">Role</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [(ngModel)]="c.role" placeholder="Enter role" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-1">
+        <button type="button" class="btn shadow-lg" (click)="removeCrew(i)"><i class="fa fa-minus-circle"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="addMovie()">{{ movieId ? 'Edit' : 'Add' }}</button>
+</div>

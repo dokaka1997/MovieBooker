@@ -1,0 +1,116 @@
+@import "src/theme/theme-variables";
+
+.navbar {
+  margin-bottom: $spacer;
+  background-color: #ff4444;
+}
+
+.nav-link.dropdown-toggle {
+  cursor: pointer;
+}
+
+.navbar-nav {
+  input {
+    float: left;
+    width: calc(300px - 50px);
+    height: 50px;
+    background: #ffffff;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0;
+    outline: none;
+  }
+  button.btn-search {
+    width: 50px;
+    height: 50px;
+    float: left;
+    text-align: center;
+    line-height: 50px;
+    background: #1b1b1b;
+    border: 0;
+    color: #ffffff;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    outline: none;
+  }
+}
+#navbar-menu {
+  padding: 15px 0px 15px 0px;
+}
+
+.navbar-nav .button:hover {
+  border: 1px solid #fff;
+}
+@media (max-width: 1540px) {
+  .navbar-nav .button--tamaya {
+    min-width: 120px;
+  }
+}
+.navbar-nav .button--tamaya {
+  overflow: hidden;
+  color: #7986cb;
+  min-width: 180px;
+}
+.navbar-nav .button {
+  background: none;
+  float: left;
+  width: 150px;
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  border: none;
+  color: #ffffff !important;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  -webkit-backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  border: 1px solid transparent;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  text-transform: uppercase !important;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.navbar-nav .button--tamaya:hover::before {
+  -webkit-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
+}
+.navbar-nav .button--tamaya:hover::before,
+.navbar-nav .button--tamaya:hover::after {
+  height: calc(50% + 3px);
+  overflow: hidden;
+}
+.navbar-nav .button--tamaya::before {
+  top: 0;
+  padding-top: 1em;
+}
+.navbar-nav .button--tamaya::before,
+.navbar-nav .button--tamaya::after {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  background: #1b1b1b;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.navbar-nav .button--tamaya:hover::after {
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+.navbar-nav .button--tamaya::after {
+  bottom: 0;
+  line-height: 0;
+}

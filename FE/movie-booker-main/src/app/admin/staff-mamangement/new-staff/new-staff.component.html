@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Add a new Room</h4>
+</div>
+<div class="modal-body">
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="m-name" class="col-sm-4 col-form-label">Staff Name</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" [(ngModel)]="name" id="m-name" placeholder="Enter name" />
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="m-type" class="col-sm-4 col-form-label">Email</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" [(ngModel)]="email" placeholder="Enter email" />
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="m-image" class="col-sm-4 col-form-label">Username</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" [(ngModel)]="username" placeholder="Enter username" />
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="m-image" class="col-sm-4 col-form-label">Password</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" [(ngModel)]="password" placeholder="Enter password" />
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="m-image" class="col-sm-4 col-form-label">Age</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control" [(ngModel)]="age" id="m-image" placeholder="Enter age" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="addStaff()">{{ staffId ? 'Edit' : 'Add' }}</button>
+</div>

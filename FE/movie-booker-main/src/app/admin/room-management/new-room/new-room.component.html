@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Add a new Room</h4>
+</div>
+<div class="modal-body">
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="m-name" class="col-sm-4 col-form-label">Room Name</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" [(ngModel)]="roomName" id="m-name" placeholder="Enter movie name" />
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="m-type" class="col-sm-4 col-form-label">Max seat</label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control" [(ngModel)]="maxSeats" id="m-type" placeholder="Enter max seat" />
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="form-group row">
+      <label for="m-image" class="col-sm-4 col-form-label">Location</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" [(ngModel)]="location" id="m-image" placeholder="Enter location" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="addRoom()">{{ roomId ? 'Edit' : 'Add' }}</button>
+</div>

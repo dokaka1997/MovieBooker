@@ -1,0 +1,95 @@
+<div class="container-fluid" *ngIf="!!movie">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 80px">
+        <div class="prs_heading_section_wrapper">
+          <h2>Movie booking</h2>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="st_video_slider_overlay"></div>
+        <div class="st_video_slider_inner_wrapper float_left">
+          <div class="st_video_slider_overlay">
+            <img class="poster" src="{{ movie.poster }}" alt="img" />
+          </div>
+          <div class="st_video_slide_sec float_left">
+            <a rel="external" target="_blank" href="{{ movie.linkTrailer }}" title="title" class="test-popup-link">
+              <img src="assets/images/icon.png" alt="img" />
+            </a>
+            <h3>{{ movie.name }}</h3>
+
+            <h5><span>2d</span> <span>3d</span> <span>D 4DX</span> <span>Imax 3D</span></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="st_slider_rating_main_wrapper" *ngIf="!!movie">
+  <div class="container ticket-search-form">
+    <div class="form-group col">
+      <div class="thumb">
+        <img src="assets/images/city.png" alt="ticket" />
+      </div>
+      <span class="type">city</span>
+      <div class="nav-item" ngbDropdown>
+        <a id="city-dropdown" class="current" ngbDropdownToggle> {{ city }} </a>
+        <div ngbDropdownMenu aria-labelledby="city-dropdown" class="dropdown-menu dropdown-menu-right">
+          <button ngbDropdownItem *ngFor="let l of movie.location; let i = index" (click)="setLocation(l.location, i)">
+            {{ l.location }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col">
+      <div class="thumb">
+        <img src="assets/images/date.png" alt="ticket" />
+      </div>
+      <span class="type">date</span>
+      <div class="nav-item" ngbDropdown>
+        <a id="date-dropdown" class="current" ngbDropdownToggle> {{ toDate(date) }} </a>
+        <div ngbDropdownMenu aria-labelledby="city-dropdown" class="dropdown-menu dropdown-menu-right">
+          <button
+            ngbDropdownItem
+            *ngFor="let l of movie.location[locationIndex].schedule; let i = index"
+            (click)="setDate(l.date, i)"
+          >
+            {{ toDate(l.date) }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center mb-2" *ngIf="!!movie">
+  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+    <div class="tab-content">
+      <div id="menu3" class="tab-pane fade active in">
+        <div class="st_calender_contant_main_wrapper float_left">
+          <div class="st_calender_row_cont float_left">
+            <div class="st_calender_asc">
+              <div class="st_calen_asc_heart">
+                <a> <i class="fa fa-heart"></i></a>
+              </div>
+              <div class="st_calen_asc_heart_cont">
+                <h3>{{ movie.location[locationIndex].schedule[dateIndex].room.room }}</h3>
+              </div>
+            </div>
+            <div class="st_calen_asc_tecket_time_select">
+              <ul>
+                <li *ngFor="let t of movie.location[locationIndex].schedule[dateIndex].room.startTime">
+                  <a
+                    [routerLink]="['/movies/seat-booking', movie.location[locationIndex].schedule[dateIndex].room.id]"
+                    [state]="{ time: t }"
+                    >{{ t }}</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="page-container">
+  <div class="sidebar-menu shadow-lg">
+    <div class="sidebar-menu-inner">
+      <header class="logo-env">
+        <div class="logo">
+          <h5>Admin Management</h5>
+        </div>
+        <div class="logo">
+          <p>Tickets Sold: {{ ticketSold }}</p>
+        </div>
+      </header>
+      <ul id="main-menu" class="main-menu" style="">
+        <li class="root-level">
+          <a routerLink="/admin/movie-management" routerLinkActive="admin-active"
+            ><i class="entypo-monitor"></i><span class="title">Movie Management</span></a
+          >
+        </li>
+        <li class="root-level">
+          <a routerLink="/admin/room-management" routerLinkActive="admin-active"
+            ><i class="entypo-monitor"></i><span class="title">Room Management</span></a
+          >
+        </li>
+        <!-- <li class="root-level">
+          <a routerLink="/admin/history-management" routerLinkActive="admin-active"
+            ><i class="entypo-monitor"></i><span class="title">History Management</span></a
+          >
+        </li> -->
+        <li class="root-level">
+          <a routerLink="/admin/staff-management" routerLinkActive="admin-active"
+            ><i class="entypo-monitor"></i><span class="title">Staff</span></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

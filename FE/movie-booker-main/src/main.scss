@@ -1,0 +1,84 @@
+/*
+ * Entry point of global application style.
+ * Component-specific style should not go here and be included directly as part of the components.
+ */
+
+// Theme variables, must be included before the libraries to allow overriding defaults
+@import "theme/theme-variables";
+
+// 3rd party libraries
+@import "~bootstrap/scss/bootstrap";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+
+// Theme customization
+@import "theme/theme";
+html,
+body {
+  height: 100%;
+  position: relative;
+}
+body {
+  background: #f6f6f6;
+}
+
+.prs_heading_section_wrapper {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.prs_heading_section_wrapper h2:before {
+  content: "";
+  border: 2px solid #ff4444;
+  width: 30px;
+  position: absolute;
+  bottom: -21px;
+  left: 0;
+  right: 0;
+  margin: 0px auto;
+  z-index: 1;
+}
+.prs_heading_section_wrapper h2:after {
+  content: "";
+  border: 1px solid #dddddd;
+  width: 170px;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  margin: 0px auto;
+}
+.btn-cart {
+  border: 1px solid #ff4444;
+  color: #ff4444;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-cart:hover {
+  background: #ff4444;
+  border: 1px solid #ff4444;
+  color: #ffffff;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+a {
+  cursor: pointer;
+}
+
+@media (min-width: 576px) {
+  .new-movie-modal .modal-dialog {
+    max-width: 1200px;
+    margin: 1.75rem auto;
+  }
+}
